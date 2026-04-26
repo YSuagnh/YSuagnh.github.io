@@ -10,7 +10,11 @@ menu:
 # RSS link
 rss: /atom.xml
 # Path of title banner image of page top
-banner: "images/ow.jpg"
+banner: "images/banner.jpg"
+# Banner height of page top (e.g. 320px, 50vh)
+banner_height: 320px
+# Banner height on mobile (e.g. 220px, 40vh)
+banner_height_mobile: 220px
 # Subtitle of page top
 subtitle:
 # Header links with icon, specified links will appear at the top right corner of the page

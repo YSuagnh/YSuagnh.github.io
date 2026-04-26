@@ -33,7 +33,12 @@ line-height-title = 1.1em
 // Header
 logo-size = 40px
 subtitle-size = 16px
-banner-height = 500px
+banner-height = unquote(hexo-config("banner_height"))
+if banner-height is null
+  banner-height = 500px
+banner-height-mobile = unquote(hexo-config("banner_height_mobile"))
+if banner-height-mobile is null
+  banner-height-mobile = banner-height
 banner-url = hexo-config("banner")
 
 sidebar = hexo-config("sidebar")
