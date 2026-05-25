@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Notes on Introduction to the Theory of Computation | Welcome to YSuagnh&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Some interesting theorem in the Theory of Computation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes on Introduction to the Theory of Computation">
+<meta property="og:url" content="https://ysuagnh.github.io/2026/05/25/Notes%20on%20itc/index.html">
+<meta property="og:site_name" content="Welcome to YSuagnh&#39;s Blog">
+<meta property="og:description" content="Some interesting theorem in the Theory of Computation">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-05-25T11:53:55.969Z">
+<meta property="article:modified_time" content="2026-05-25T11:53:55.969Z">
+<meta property="article:author" content="YSuagnh">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Welcome to YSuagnh's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Welcome to YSuagnh&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">正如我们共同谱写的故事那般~</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Category</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/cv">CV</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://YSuagnh.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Notes on itc" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/25/Notes%20on%20itc/" class="article-date">
+  <time class="dt-published" datetime="2026-05-25T11:53:55.969Z" itemprop="datePublished">2026-05-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Notes/">Notes</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Notes on Introduction to the Theory of Computation
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+          <p>$\renewcommand{\sf}{\mathsf}$</p>
+<h1>Computability Theory</h1>
+<h2 id="Some-Basic-Definitions">Some Basic Definitions</h2>
+<h3 id="Turing-Machine">Turing Machine</h3>
+<p>$\rm{Definition}$<br>
+A $\rm{Turing\ Machine}$ is a 7-tuple, $(Q,\Sigma, \Gamma, \delta, q_0, q_{accept}, q_{reject})$, where $Q,\Sigma,\Gamma$ are finite set and</p>
+<ol>
+<li>$Q$ is the set of states,</li>
+<li>$\Sigma$ is the input alphabet not containing the blank symbol $\sqcup$,</li>
+<li>$\Gamma$ is the tape alphabet, where $\sqcup \in \Gamma, \Sigma \subseteq \Gamma$,</li>
+<li>$\delta:Q\times \Gamma \rightarrow Q \times \Gamma \times {L,R}$ is the transition function,</li>
+<li>$q_0 \in Q$ is the start state,</li>
+<li>$q_{accept} \in Q$ is the accept state,</li>
+<li>$q_{reject} \in Q$ is the reject state, $q_{accept}\ne q_{reject}.$</li>
+</ol>
+<hr>
+<span id="more"></span>
+<p>A Turing Machine $M=(Q, \Sigma, \Gamma, \delta, q_0, q_{accept}, q_{reject})$ computes as follows. Initially, $M$ receives its input $w=w_1w_2…w_n\in\Sigma^{*}$ on the leftmost n squares ofthe tape, and the rest of the tape is filled with blank symbol $\sqcup$. The head starts on the leftmost square of the tape. Note that $\Sigma$ does not contain the blank symbol, so the first blank appearing on the tape marks the end of the input. Once $M$ has started, the computation proceeds according to the rules described<br>
+by the transition function. If $M$ ever tries to move its head to the left off the left-hand end of the tape, the head stays in the same place for that move, even though the transition function indicates L. The computation continues until it enters either the accept or reject states, at which point it halts. If neither occurs, $M$ goes on forever.</p>
+<h3 id="Configuration">Configuration</h3>
+<p>$\rm{Definition}$<br>
+As a Turing Machine computes, a setting of current state, current tape contents and current head location is called a $\rm{configuration}$.</p>
+<h3 id="Turing-recognizable-Recursively-Enumerable-RE">Turing-recognizable(Recursively Enumerable, RE)</h3>
+<p>$\rm{Definition}$<br>
+Call a language Turing-recognizable if some Turing Machine recognizes it.</p>
+<h3 id="Turing-decidable-Decidable-Recursive">Turing-decidable(Decidable, Recursive)</h3>
+<p>$\rm{Definition}$<br>
+Call a language Turing-decidable if some Turing Machine decides it.</p>
+<hr>
+<p><em>A Turing Machine is called a</em> $\rm{decider}$ <em>if it never loop and always make a decision to accept or reject.A decider that recognizes some language also is said to</em> $\rm{decide}$ <em>that language</em></p>
+<h2 id="Other-computation-models">Other computation models</h2>
+<h3 id="Multitape-Turing-Machine">Multitape Turing Machine</h3>
+<p>A multitape Turing Machine is a Turing Machine wiht multiple tapes. Each tape has its own head for reading and writing. Initially the input appears on the first tape, and other tapes stay blank. The transition function $\delta : Q\times \Gamma^k\rightarrow Q \times \Gamma^k \times {L,R,S}^k$ allow for reading, writing, and moving the heads on some or all of the tapes in the same time.</p>
+<p>$\rm{Theorem}$<br>
+Every multitape Turing machine has an equivalent single-tape Turing machine.</p>
+<p>$\rm{Proof\ Idea}$<br>
+We show how to convert a multitape Turing Machine $M$ to a single-tape Turing Machine $S$. The key idea is to show that we can simulate $M$ with $S$ .<br>
+Say that $M$ has $k$ tapes. To simulate $M$, $S$ needs to store the contents of each tape and keep track of the location of their head on a single tape. $S$ uses a new symbol # as a delimiter to separate the contents of different tapes, and write a dot above a tape symbol to mark the location where the head on that tape would be. We call the contents and dotted symbol stored on the single tape of $S$ virtual tapes and virtual heads. For example, the start configuration for $M$ would be stored as $\# \dot{w_1}w_2…w_n \# \dot{\sqcup} \# … \# \dot{\sqcup} \#$ on the single tape of $S$.<br>
+To simulate a single move on $M$, $S$ scans the whole tape to read the symbol under each virtual heads. And make a second pass to update the virtual tapes according to $M$'s transition function.<br>
+If $S$ moves a virtual head to the right onto a #, $S$ shifts the tape content, from this cell to the rightmost #, one unit to the right and writes blank symbol on this cell, and continues to simulate.</p>
+<hr>
+<p>$\rm{Corollary}$<br>
+A language is Turing-recognizable if and only if some multitape Turing machine<br>
+recognizes it.</p>
+<h3 id="Nondeterministic-Turing-Machine">Nondeterministic Turing Machine</h3>
+<p>A nondeterministic Turing Machine may proceed according to several possibilities at any point in a computation. The transition function for a Nondeterministic Turing Machine is defined as $\delta:Q\times\Gamma\rightarrow \cal{P}(Q\times\Gamma\times{L,R})$</p>
+<hr>
+<p>$\rm{Theorem}$<br>
+Every nondeterministic Turing machine has an equivalent deterministic Turing machine.</p>
+<p>$\rm{Proof\ Idea}$<br>
+We can simulate a nondeterministic TM $N$ with a deterministic TM $D$. The key is to perform brandth-first search on $N$'s nondeterministic computation tree.<br>
+To simplify, we use a 3 tape deterministic TM $D$, which we have proved is equivalent to a single-tape TM. Tape 1 always contains the input string and is never altered. Tape 2 maintains a copy of $N$’s tape on some branch of its nondeterministic computation. Tape 3 keeps track of $D$’s location in $N$’s nondeterministic computation tree.<br>
+There is a constant $b$ such that for every node in the tree can have at most $b$ children. For every child of a node, we can assign an element from $\Gamma_b = {1,2,…,b}$ to mark it. Thus we can assigne a address $231$ to the node we arrive by starting at the root, going to its 2nd child, going to that node’s 3rd child, and finally going to that node’s 1st child. Thus we can perform brandth-first search on the computation tree.</p>
+<hr>
+<p>$\rm{Corollary}$<br>
+A language is Turing-recognizable if and only if some nondeterministic Turing machine recognizes it.</p>
+<p>$\rm{Corollary}$<br>
+A language is decidable if and only if some nondeterministic Turing machine decides it.</p>
+<h3 id="Enumerator">Enumerator</h3>
+<p>An Enumerator is a Turing Machine attached to a printer. Enumerator can use the printer to print strings.Ifthe enumerator doesn’t halt, it may print an infinite list of strings. The language enumerated by $E$ is the collection of all the strings that it eventually prints out.<br>
+A language is recursively enumerable iff some enumerators enumerates it. Next we show that recursively enumerable is equivalent to Turing-recognizable.</p>
+<p>$\rm{Theorem}$<br>
+A language is Turing-recognizable iff some enumerator enumerator it.</p>
+<p>$\rm{Proof}$<br>
+First we show that if we have an enumerator $E$ that enumerates a language $A$, there is a TM $T$ performs as follows that recognizes $A$.</p>
+<p>$T=$ On input $w$:</p>
+<ol>
+<li>Run $E$ . Every time $E$ output a string, compare it to $w$,</li>
+<li>If $w$ appears in the output of $E$, $accept$.</li>
+</ol>
+<p>Thus, $T$ accept those strings appear on $E$'s list.</p>
+<p>Now we show that if TM $T$ recognizes a language $A$, there is an enumerator performs as follows that enumerates $A$. Say that $s_1, s_2, … $ is a list of all possible strings in $\Sigma^{*}$.</p>
+<p>$E=$ Ignore the input:</p>
+<ol>
+<li>Repeat the following for $i=1,2,3,…$,</li>
+<li>Run $T$ on each input for $i$ steps, $s_1, s_2, s_3,…,s_i$,</li>
+<li>If any computations accept, print out the corresponding $s_i$.</li>
+</ol>
+<p>If $M$ accepts a particular string $s$, eventually it will appear on the list generated by $E$ .</p>
+<h2 id="Decidablity">Decidablity</h2>
+<p>Review the concept of decidable language. We call a language decidable if it’s decided by a decider. A decider is a Turing Machine always halt and make a decision to accept or reject on any input.</p>
+<p>$\rm{Theorem}$<br>
+Some languages are not Turing-recognizable.</p>
+<p>$\rm{Proof\ Idea}$<br>
+Consider the set of all Turing Machine $\cal{T}$ and the set of all languages $\cal{L}$ over alphabet $\Sigma$. Let $\cal{B}$ be a set of all <em>infinite binary sequence</em>.We prove the theorem by showing that there is no onto function from $\cal{T}$ to $\cal{L}$ . To do so, we prove that there is a one-to-one function from $\cal{T}$ to $\Sigma^{*}$ and from $\cal{B}$ to $\cal{L}$, and there is no onto function from $\Sigma^{*}$ to $\cal{B}$ .</p>
+<p>$\rm{Proof}$<br>
+There is a one-to-one function from $\cal{T}$ to $\Sigma^{*}$ because every Turing Machine has a encoding to a string $\langle M \rangle$. Thus $f(M)=\langle M \rangle$ is such a function. Now we show that there is a one-to-one function from $\cal{L}$ to $\cal{B}$. Consider all strings in $\Sigma^{*}$ in a specific order without repetition $s_1,s_2,s_3,…$ . We construct a function $g:\cal{B}\rightarrow\cal{L}$ .For a binary string $B=b_1b_2b_3…$, if $b_i$ is $1$, then $s_i$ appears in the language $g(B)$. If $b_i$ is $0$, then $s_i$ doesn’t appears in $g(B)$.<br>
+Now we use diagonalization method to prove that there is no onto function from $\Sigma^{*}$ to $\cal{B}$. Assume there is a onto function $h:\Sigma^{*}\rightarrow \cal{B}$, and $h(s_i)=B_i$ is a infinite binary sequence. For a infinite binary sequence $B$, we call the $i$ -th bit of the sequence $B[i]$. Considering a infinite binary sequence $NB=\overline{B_1[1]}\ \overline{B_2[2]}\ \overline{B_3[3]}…$ . We find that for any $i$, $h(s_i)=B_i\ne NB$ because the $i$ -th bit of them are different. Thus, such function don’t exist and there is no onto function from $\cal{T}$ to $\cal{L}$, which means some languages are not recognized by any Turing Machine.</p>
+<hr>
+<p>Now we give an example of a undicidable language.</p>
+<p>Let<br>
+$$<br>
+A_\sf{TM}={\langle M, w\rangle|M\ is\ a\ TM\ and\ M\ accepts\ w}<br>
+$$</p>
+<p>$\rm{Theorem}$<br>
+$A_\sf{TM}$ undicidable.</p>
+<p>$\rm{Proof}$<br>
+We assume that $A_\sf{TM}$ is decadable and is decided by a TM $H$ .On input $\langle M,w \rangle$, Where $M$ is a TM and $w$ is a string, $H$ halts and accepts if $M$ accepts $w$, and it halts and rejects if $M$ rejects $w$.<br>
+Now we construct a TM $D$ with $H$ as a subroutine. $D$ take a TM $M$ as a input and runs $M$ on its own description $\langle M\rangle$. $D$ is descriped as follows.<br>
+$D=$ On input $\langle M\rangle$, where $M$ is TM:</p>
+<ol>
+<li>Run $H$ on input $\langle M, \langle M\rangle\rangle$.</li>
+<li>Output the opposite of what $H$ outputs. That is, if $H$ accepts, <em>reject</em>; if $H$ rejects, <em>accepts</em>.</li>
+</ol>
+<p>Thus we have</p>
+
+$$D(\langle D\rangle)=\left\{ \begin{matrix} accept, \ \rm{if\ D\ rejects\ \langle D\rangle}  \\ reject, \ \rm{if\ D\ accepts\ \langle D\rangle} \end{matrix}\right.$$
+
+<p>No matter what D does, it is forced to do the opposite, which is obviously a contradiction. Thus neither TM $H$ nor $D$ can exist.</p>
+<hr>
+<p>$\rm{Corollary}$<br>
+A language is decidable iff it is Turing-recognizable and co-Turing-recognizable.</p>
+<p>In other words, a language is decidable exactly when both it and its complement are Turing-recognizable.</p>
+<p>$\rm{Corollary}$<br>
+$\overline{A_\sf{TM}}$ is not Turing-recognizable.</p>
+<p>Otherwise $A_\sf{TM}$ is decidable.</p>
+<hr>
+<p>$\rm{Exercise}$<br>
+Let $A$ be a Turing-recognizable language consisting of descriptions of Turing machines, ${\langle M_1\rangle,\langle M_2\rangle ,…}$, where every $M_i$ is a decider. Prove that some decidable language is not decided by any decider $M_i$ whose description appears in $A$.</p>
+<p>$\rm Proof$<br>
+We use diagonalization method to construct such language $D$. Consider all strings in $\Sigma^{*}$ in a specific order $s_1,s_2,…$ without repetition. Let $E$ be a enumerator of $A$, if the $i$-th Turing machine that $E$ output accepts $s_i$, then $s_i$ is not in $D$, otherwise $s_i$ is in $D$. Clearly $D$ is not decided by any Turing machine in $A$. A TM $T$ described as follows decides $D$.</p>
+<p>$T=$ On input $w$:</p>
+<ol>
+<li>Find the $w$'s location in the sequence $s_1,s_2,…$, say $w=s_i$,</li>
+<li>Run enumerator $E$ until it outputs the $i$-th Turing machine $M_i$,</li>
+<li>run $M_i$ on input $w$, if it accepts, <em>reject</em>. If it rejects, <em>accept</em>.</li>
+</ol>
+<h2 id="Reducibility">Reducibility</h2>
+<p>A $reduction$ is a way of converting one problem to another problem in such a way that a solution to the second problem can be used to solve the first problem.<br>
+By reduction, we can prove the undicidibility of certain language in a much easier way. Here are some examples.</p>
+<h3 id="Some-examples">Some examples</h3>
+<p>Let</p>
+
+$$HALT_\sf{TM}=\{\langle M, w\rangle| \rm M\ is\ a\ TM\ and\ M\ halts\ on\ input\ \cal{w}\}$$
+
+<p>$\rm Theorem$<br>
+$HALT_\sf{TM}$ is undicidable.</p>
+<p>$\rm Proof$<br>
+Assume $HALT_\sf{TM}$ is decidable and $H$ is its decider. Then we can construct a TM $T$ as follows that decides $A_\sf{TM}$</p>
+<p>$T=$ On input $\langle M, w\rangle$, where $M$ is a TM and $w$ is a string:</p>
+<ol>
+<li>Run $H$ on input $\langle M,w\rangle$,</li>
+<li>If $H$ rejects, <em>reject</em>,</li>
+<li>If $H$ accepts, simulate $M$ on input $w$,</li>
+<li>If $M$ accepts, <em>accept</em>; if $M$ reject, <em>reject</em>.</li>
+</ol>
+<p>Thus, if $H$ decides $HALT_\sf{TM}$, then $T$ decides $A_\sf{TM}$, which is a contradiction.</p>
+<hr>
+<p>Let 
+$$E_\sf{TM}=\{\langle M\rangle| \rm M\ is\ a\ TM\ and\ L(M)= \emptyset\}$$
+</p>
+<p>$\rm Theorem$<br>
+$E_\sf{TM}$ is undecidable.</p>
+<p>$\rm Proof$<br>
+For any given TM $M$ and string $w$, we can construct a TM $M_1$ as follows.</p>
+<p>$M_1=$ On input $x$:</p>
+<ol>
+<li>If $x\ne w$, <em>reject</em>,</li>
+<li>If $x = w$, run $M$ on input $w$ and <em>accept</em> if $M$ does.</li>
+</ol>
+<p>Assume $E_\sf{TM}$ is decidable and $E$ is its decider, thus we can construct a TM $T$ as follows that decides $A_\sf{TM}$.</p>
+<p>$T=$ On input $\langle M, w\rangle$, where $M$ is a TM and w is a string :</p>
+<ol>
+<li>Use the description of $M$ and $w$ to construct the TM $M_1$ just described,</li>
+<li>Run $E$ on input $M_1$.</li>
+<li>If $E$ accepts, <em>reject</em>; if $E$ rejects, <em>accept</em>.</li>
+</ol>
+<p>Thus, if $E$ decides $E_\sf{TM}$, then $A_\sf{TM}$ is decidable, which is a contradiction.</p>
+<hr>
+<p>Let 
+$$REGULAR_\sf{TM}=\{\langle M\rangle|\rm M\ is\ a\ TM\ and\ L(M)\ is\ a\ regular\ language\}$$
+</p>
+<p>$\rm Theorem$<br>
+$REGULAR_\sf{TM}$ is undecidable.</p>
+<p>$\rm Proof\ Idea$<br>
+Assume $REGULAR_\sf{TM}$ is decidable and $R$ decides it. We construct a TM $M_2$ as follows using the description of TM $M$ and string $w$,<br>
+$M_2=$ On input $x$:</p>
+<ol>
+<li>If $x$ has the form $0^n1^n$, then <em>accept</em>.</li>
+<li>If $x$ doesn’t has this form, run $M$ on input $w$, <em>accept</em> if $M$ accept.<br>
+Clearly if $M$ accept $w$, then $L(M_2)=\Sigma^{*}$, otherwise $L(M_2)$ is a CFL. Thus if we run $R$ on $\langle M_2\rangle$, we can decide $A_\sf{TM}$, which is a contradiction.</li>
+</ol>
+<hr>
+<p>Let 
+$$EQ_\sf{TM}=\{\langle M_1, M_2\rangle|\rm M_1,M_2\ are\ TM\ and\ L(M_1)=L(M_2)\}$$
+</p>
+<p>$\rm Theorem$<br>
+$EQ_\sf{TM}$ is undecidable.</p>
+<p>$\rm Proof\ Idea$<br>
+We can construct a TM $E$ that rejects all input. Assume $EQ_\sf{TM}$ is decidable and $EQ$ decides it. Thus if we run $EQ$ on input $\langle M, E\rangle$, then we can decide $E_\sf{TM}$, which is a contradiction.</p>
+<h3 id="Computation-history">Computation history</h3>
+<p>$\rm Definition$<br>
+Let $M$ be a TM and $w$ be a input string. An $\rm accepting\ computation\ history$ for $M$ on $w$ is a sequence of configurations $c_1,c_2,…,c_l$, where $c_1$ is the start configuration and $c_l$ is an accepting configuration of $M$, and each $c_i$ legally follows from $c_{i-1}$ according to the rules of $M$. A $\rm rejecting\ computation\ history$ for $M$ on $w$ is defined similarly, except that $c_l$ is a rejecting configuration.</p>
+<p>$\rm Definition$<br>
+A $\rm linear\ bounded\ automaton$ is a restricted type of Turing machine wherein the tape head isn’t permitted to move off the portion of the tape containing the input. If the machine tries to move its head off either end of the input, the head stays where it is—in the same way that the head will not move off the left-hand end of an ordinary Turing machine’s tape.</p>
+<p>In a word, a linear bounded automaton is a Turing machine whose tape length is exactly the length of its input. Keep in mind that any strings in $\Sigma^{*}$ can be a legal in put for a LBA. It’s the tape that be restricted to the input, not the other way.</p>
+<hr>
+<p>Let
+$$A_\sf{LBA}=\{\langle M, w\rangle |\rm M\ is\ a\ LBA\ that\ accepts\ string\ \cal w\}$$
+</p>
+<p>$\rm Theorem$<br>
+$A_\sf{LBA}$ is decidable.</p>
+<p>$\rm Proof\ Idea$<br>
+Let $M$ be a LBA with $q$ states and $g$ symbols in the alphabet. It’s clear that there are at most $qng^n$ distinct configurations of $M$ for a tape of length $n$. Thus we can simulate $M$ on input $w$ for at most $qng^n$ steps. If $M$ has not halt by then, it must be looping. Otherwise $M$ halts and decides to accept or reject.</p>
+<hr>
+<p>Let
+$$E_\sf{LBA}=\{\langle M\rangle|\rm M\ is\ a\ LBA\ and\ L(M)=\emptyset\}$$
+</p>
+<p>$\rm Theorem$<br>
+$E_\sf{LBA}$ is undecidable.</p>
+<p>$\rm Proof\ Idea$<br>
+Assume $E_\sf{LBA}$ is decidable and TM $E$ decides it. For an instance of $A_\sf{TM}$, $\langle M,w \rangle$, we can construct a $LBA\ B$ that accepts all accepting computation history of $M$ on $w$. If we run $E$ on input $\langle B\rangle$ , then we can decide whether $M$ accepts $w$, which makes $A_\sf{TM}$ decidable and is a contradiction.<br>
+Now we give a description of $B$. Recall that an accepting computation history is a sequence of configurations $C_1,C_2,…,C_l$. Assume that the accepting computation history is presented as a single string with the configurations separated from each other by the # symbol. $B$ breaks up the input string into $C_1,C_2,…,C_l$, then determines whether each $C_i$ satisfies the three conditions of an accepting computation configurations.</p>
+
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ysuagnh.github.io/2026/05/25/Notes%20on%20itc/" data-id="cuidDlAyPFxEtAVCDJrxE5Rob" data-title="Notes on Introduction to the Theory of Computation" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/05/25/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/05/25/Notes%20on%20Bdij/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Notes on Breaking the Sorting Barrier for Directed Single-Source Shortest Paths</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Notes/">Notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%97%B2%E8%81%8A/">闲聊</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/05/">五月 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/05/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/25/Notes%20on%20itc/">Notes on Introduction to the Theory of Computation</a>
+          </li>
+        
+          <li>
+            <a href="/2026/05/25/Notes%20on%20Bdij/">Notes on Breaking the Sorting Barrier for Directed Single-Source Shortest Paths</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 YSuagnh<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Category</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/cv" class="mobile-nav-link">CV</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
