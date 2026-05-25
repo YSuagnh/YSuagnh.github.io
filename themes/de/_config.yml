@@ -7,12 +7,13 @@ menu:
   Archives: /archives
   Category: /categories
   Tags: /tags
-# RSS link
+  CV: /cv
+# RSS linkmt
 rss: /atom.xml
 # Path of title banner image of page top
-banner: "images/banner.jpg"
+banner: "images/mt.jpg"
 # Banner height of page top (e.g. 320px, 50vh)
-banner_height: 320px
+banner_height: 220px
 # Banner height on mobile (e.g. 220px, 40vh)
 banner_height_mobile: 220px
 # Subtitle of page top
