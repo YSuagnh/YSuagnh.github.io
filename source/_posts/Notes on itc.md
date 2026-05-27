@@ -2,9 +2,10 @@
 title: Notes on Introduction to the Theory of Computation
 category: Notes
 description: Some interesting theorem in the Theory of Computation
+date: 2026-5-10
 ---
 
-$\renewcommand{\sf}{\mathsf}$
+$\newcommand{\ol}{\overline}$
 # Computability Theory
 
 ## Some Basic Definitions
@@ -144,7 +145,8 @@ $A_\sf{TM}$ undicidable.
 
 $\rm{Proof}$
 We assume that $A_\sf{TM}$ is decadable and is decided by a TM $H$ .On input $\langle M,w \rangle$, Where $M$ is a TM and $w$ is a string, $H$ halts and accepts if $M$ accepts $w$, and it halts and rejects if $M$ rejects $w$.  
-Now we construct a TM $D$ with $H$ as a subroutine. $D$ take a TM $M$ as a input and runs $M$ on its own description $\langle M\rangle$. $D$ is descriped as follows.  
+Now we construct a TM $D$ with $H$ as a subroutine. $D$ take a TM $M$ as a input and runs $M$ on its own description $\langle M\rangle$. $D$ is descriped as follows.
+
 $D=$ On input $\langle M\rangle$, where $M$ is TM:
 1. Run $H$ on input $\langle M, \langle M\rangle\rangle$.
 2. Output the opposite of what $H$ outputs. That is, if $H$ accepts, *reject*; if $H$ rejects, *accepts*.
@@ -295,3 +297,71 @@ $\rm Proof\ Idea$
 Assume $E_\sf{LBA}$ is decidable and TM $E$ decides it. For an instance of $A_\sf{TM}$, $\langle M,w \rangle$, we can construct a $LBA\ B$ that accepts all accepting computation history of $M$ on $w$. If we run $E$ on input $\langle B\rangle$ , then we can decide whether $M$ accepts $w$, which makes $A_\sf{TM}$ decidable and is a contradiction.  
 Now we give a description of $B$. Recall that an accepting computation history is a sequence of configurations $C_1,C_2,...,C_l$. Assume that the accepting computation history is presented as a single string with the configurations separated from each other by the # symbol. $B$ breaks up the input string into $C_1,C_2,...,C_l$, then determines whether each $C_i$ satisfies the three conditions of an accepting computation configurations.
 
+### Mapping reduction
+
+$\rm Definition$
+A function $f:\Sigma^{\*}\rightarrow\Sigma^{\*}$ is a $\rm computable\ function$ if some Turing machine $M$, on every input $w$, halts with just $f(w)$ on its tape.
+
+$\rm Definition$
+Language $A$ is $\rm mapping\ reducible$ to language $B$, written $A\le_m B$, if there is a computable function $f:\Sigma^{\*}\rightarrow \Sigma^{\*}$ where for eevery $w$
+{% raw %}
+$$w\in A \Longleftrightarrow f(w)\in B$$
+{% endraw %}
+The function $f$ is called the $\rm reduction$ from $A$ to $B$.
+
+$\rm Theorem$
+If $A \le_m B$ and $B$ is decidable, then $A$ is decidable.
+
+$\rm Proof$
+Let $M$ be the decider for $B$ and $f$ be the reduction from $A$ to $B$. We describe a decider for $A$ as follows.
+
+$N=$ On input $w$:
+1. Compute $f(w)$.
+2. Run $M$ on input $f(w)$, output whatever $M$ outputs.
+
+Clearly, if $w\in A$, then $f(w)\in B$ because $f$ is a reduction form $A$ to $B$. Thus $M$ accepts $f(w)$ whenever $w\in A$.
+
+$\rm Corollary$
+If $A \le_m B$ and $A$ is undecidable, then $B$ is undecidable.
+
+$\rm Theorem$
+If $A \le_m B$ ans $B$ is Turing-recognizable, then $A$ is Turing-recognizable.
+
+$\rm Proof$
+Same as that of decidibility.
+
+$\rm Corollary$
+If $A \le_m B$ ans $A$ is not Turing-recognizable, then $B$ is not Turing-recognizable.
+
+---
+
+The definition of mapping reduction implies that $A \le_m B$ means exactly the same as $\ol{A}\le_m\ol{B}$. We have already known that $\ol{A_{\sf{TM}}}$ is not Turing-recognizable. Thus if $A_{\sf{TM}}\le_m \ol{B}$, then $B$ is not Turing-recognizable.
+
+$\rm Theorem$
+$EQ_{\sf{TM}}$ is neither Turing-recognizable nor co-Turing-recognizable.
+
+$\rm Proof$
+First we show that $EQ_{\sf TM}$ is not Turing-recognizable. We do so by prove $A_{\sf TM} \le_m \ol{EQ_{\sf TM}}$. The reducing function $f$ works as follows.
+
+$F=$ On input $\langle M,w\rangle$, where $M$ is a TM and $w$ is a string:
+1. Construct two machines $M1, M2$ :  
+    - $M_1=$ On any input:
+        1. *Rejects*.
+    - $M_2=$ On any input:
+        1. Run $M$ on input $w$. If it accepts, *accept*. 
+2. Outputs $\langle M_1, M_2\rangle$.
+
+Clearly if $M$ accepts $w$, then $M_2$ accepts all strings. And so the two machines are not equivalent. If $M$ doesn't accept $w$, then $M_2$ accepts nothing, and is equivalent to $M_1$.  
+Now we show that $EQ_{\sf TM}$ is not co-Turing-recognizable. We do so by prove $A_{\sf TM} \le_m EQ_{\sf TM}$ .The reducing function $g$ works as follows.
+
+$G=$ On input $\langle M, w\rangle$, where $M$ is a TM and $w$ is a string:
+1. Construct two machines $M_1, M_2$:
+    - $M_1$ = On any input:
+        1. *Accepts*.  
+    - $M_2$ = On any input:
+        1. Run $M$ on input $w$. If it accepts, *accept*.
+2. Output $\langle M_1, M_2\rangle$
+
+The only differenct between $f$ and $g$ is in machine $M_1$.
+
+---
