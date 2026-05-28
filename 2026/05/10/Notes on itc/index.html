@@ -14,7 +14,7 @@
 <meta property="og:description" content="Some interesting theorem in the Theory of Computation">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-05-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-27T08:10:56.350Z">
+<meta property="article:modified_time" content="2026-05-28T17:59:30.395Z">
 <meta property="article:author" content="YSuagnh">
 <meta name="twitter:card" content="summary">
   
@@ -123,7 +123,9 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         
-          <p>$\newcommand{\ol}{\overline}$</p>
+          <p>$\newcommand{\ol}{\overline}$<br>
+$\newcommand{\cp}{\mathrm{P}}$<br>
+$\newcommand{\cnp}{\mathrm{NP}}$</p>
 <h1>Computability Theory</h1>
 <h2 id="Some-Basic-Definitions">Some Basic Definitions</h2>
 <h3 id="Turing-Machine">Turing Machine</h3>
@@ -364,48 +366,231 @@ Same as that of decidibility.</p>
 <p>$\rm Corollary$<br>
 If $A \le_m B$ ans $A$ is not Turing-recognizable, then $B$ is not Turing-recognizable.</p>
 <hr>
-<p>The definition of mapping reduction implies that $A \le_m B$ means exactly the same as $\ol{A}\le_m\ol{B}$. We have already known that $\ol{A_{\sf{TM}}}$ is not Turing-recognizable. Thus if $A_{\sf{TM}}\le_m \ol{B}$, then $B$ is not Turing-recognizable.</p>
+<p>The definition of mapping reduction implies that $A \le_m B$ means exactly the same as $\ol{A}\le_m\ol{B}$. We already know that $\ol{A_{\sf{TM}}}$ is not Turing-recognizable. Thus if $A_{\sf{TM}}\le_m \ol{B}$, then $B$ is not Turing-recognizable.</p>
 <p>$\rm Theorem$<br>
 $EQ_{\sf{TM}}$ is neither Turing-recognizable nor co-Turing-recognizable.</p>
 <p>$\rm Proof$<br>
 First we show that $EQ_{\sf TM}$ is not Turing-recognizable. We do so by prove $A_{\sf TM} \le_m \ol{EQ_{\sf TM}}$. The reducing function $f$ works as follows.</p>
 <p>$F=$ On input $\langle M,w\rangle$, where $M$ is a TM and $w$ is a string:</p>
 <ol>
-<li>
-<p>Construct two machines $M1, M2$ :<br>
-$M_1=$ On any input:</p>
+<li>Construct two machines $M1, M2$ :
+<ul>
+<li>$M_1=$ On any input:
 <ol>
 <li><em>Rejects</em>.</li>
 </ol>
-<p>$M_2=$ On any input:</p>
+</li>
+<li>$M_2=$ On any input:
 <ol>
 <li>Run $M$ on input $w$. If it accepts, <em>accept</em>.</li>
 </ol>
 </li>
-<li>
-<p>Outputs $\langle M_1, M_2\rangle$.</p>
+</ul>
 </li>
+<li>Outputs $\langle M_1, M_2\rangle$.</li>
 </ol>
 <p>Clearly if $M$ accepts $w$, then $M_2$ accepts all strings. And so the two machines are not equivalent. If $M$ doesn’t accept $w$, then $M_2$ accepts nothing, and is equivalent to $M_1$.<br>
 Now we show that $EQ_{\sf TM}$ is not co-Turing-recognizable. We do so by prove $A_{\sf TM} \le_m EQ_{\sf TM}$ .The reducing function $g$ works as follows.</p>
 <p>$G=$ On input $\langle M, w\rangle$, where $M$ is a TM and $w$ is a string:</p>
 <ol>
-<li>
-<p>Construct two machines $M_1,M_2$:<br>
-$M_1$ = On any input:</p>
+<li>Construct two machines $M_1, M_2$:
+<ul>
+<li>$M_1$ = On any input:
 <ol>
 <li><em>Accepts</em>.</li>
 </ol>
-<p>$M_2$ = On any input:</p>
+</li>
+<li>$M_2$ = On any input:
 <ol>
 <li>Run $M$ on input $w$. If it accepts, <em>accept</em>.</li>
 </ol>
 </li>
-<li>
-<p>Output $\langle M_1, M_2\rangle$</p>
+</ul>
 </li>
+<li>Output $\langle M_1, M_2\rangle$</li>
 </ol>
 <p>The only differenct between $f$ and $g$ is in machine $M_1$.</p>
+<hr>
+<h2 id="Advanced-Topics-in-Computability-Theory">Advanced Topics in Computability Theory</h2>
+<p>See <a href="/2025/12/10/hello-world/">this</a>.</p>
+<h1>Complexity Theory</h1>
+<h2 id="Time-Complexity">Time Complexity</h2>
+<p>In this chapter, we analyze how much time an algorithm uses.</p>
+<p>$\rm Definition$<br>
+Let $M$ be a deterministic Turing machine that halts on all inputs. The $\rm running\ time$ or $\rm time\ complexity$ is a function $f:\mathcal{N\rightarrow N}$, where $f(n)$ is the maximum number of steps that $M$ uses on any input of length $n$. If $f(n)$ is the running time of $M$,we say that $M$ runs in time $f(n)$ and that $M$ is an $f(n)$ time Turing machine. Customarily we use nto represent the length of the input.</p>
+<h3 id="Some-basic-definition">Some basic definition</h3>
+<p>$\rm Definition$<br>
+Let $f$ and $g$ be functions $f,g:\mathcal{N\rightarrow R^+}$. We say $f(n)=O(g(n))$ if positive integers $c$ and $n_0$ exist such that for every integer $n\ge n_0$,</p>
+
+$$f(n) \le c\ g(n)$$
+
+<p>When $f(n)=O(g(n))$, we say that $g(n)$ is an $\rm upper\ bound$ for $f(n)$, or more precisely, that $g(n)$ is an $\rm asymptotic\ upper\ bound$ for<br>
+$f(n)$, to emphasize that we are suppressing constant factors.</p>
+<p>$\rm Definition$<br>
+Let $f$ and $g$ be functions $f,g:\mathcal{N\rightarrow R^+}$. We say $f(n) = o(g(n))$ if</p>
+
+$$\lim_{x \to \infty} \frac{f(n)}{g(n)}=0$$
+
+<p>In other words, $f(n) = o(g(n))$ means that for any real number $c&gt;0$, a number $n_0$ exists, where $f(n) &lt; c\ g(n)$ for all $n\ge n_0$.</p>
+<p>$\rm Definition$<br>
+Let $t:\mathcal{N\to R^+}$ be a function. Define the $\rm time\ complexity\ class$, $\rm TIME(\cal t(n))$ to be the collection of all languages that are decidable by an $O(t(n))$ time Turing machine.</p>
+<h3 id="The-class-P">The class P</h3>
+<p>$\rm Definition$<br>
+$\rm P$ is the class of languages that are decidable in polynomial time on a single-tape deterministic Turing machine. In other words,</p>
+
+$$\rm P=\bigcup_{\cal k} TIME(\cal n^k)$$
+
+<hr>
+<p>The class $\rm P$ plays a central role in our theory and is important because</p>
+<ol>
+<li>$\rm P$ is invariant for all models of computation that are polynomially equivalent to the deterministic single-tape Turing machine, and</li>
+<li>$\rm P$ roughly corresponds to the class of problems that are realistically solvable on a computer.</li>
+</ol>
+<p>Now we give some examples in $\rm P$. Let</p>
+
+$$PATH=\{\langle G, s, t\rangle|G\rm\ is\ a\ directed\ graph\ that\ has\ a\ directed\ path\ from\ \mathcal{s}\ to\ \mathcal{t}\}$$
+
+<p>$\rm Theorem$<br>
+$PATH \in \rm P$</p>
+<p>$\rm Proof\ Idea$ We simply run brand-first search start from $s$ on the graph, and mark every node as we reached.</p>
+<p>$\rm Theorem$<br>
+Every CFL is a member in $\rm P$.</p>
+<p>$\rm Proof\ Idea$<br>
+Let $L$ be a CFL generated by CFG $G$ that is in Chomsky normla form. This is a classic problem using $dynamic\ programming$. Given a string $w$, and we need to check if $w\in L$. For all $1 \le l \le r \le |w|$ and every non-terminal symbol $v$ in $G$, we check if substring $s_{[l,r]}$ can be derived by $v$. We start with substrings of length $1$, and check longer substrings using the information of its own substrings. A harder version is in AtCoder <a target="_blank" rel="noopener" href="https://atcoder.jp/contests/abc261/tasks/abc261_g">ABC261g</a> .</p>
+<h3 id="The-class-NP">The class NP</h3>
+<p>$\rm Definition$<br>
+A $\rm verifier$ for a language $A$ is an algorithm $V$, where</p>
+
+$$A=\{w|V \rm accepts\ \cal\langle w,c \rangle \rm for\ some\ string\ \cal c\}$$
+
+<p>We measure the time of a verifier only in terms of the length of $w$,so a $\rm polynomial\ time\ verifier$ runs in polynomial time in the length of $w$. A language $A$ is $\rm polynomially\ verifiable$ if it has a polynomial time verifier.</p>
+<p>$\rm Definition$<br>
+$NP$ is the class of languages that have polynomial time verifiers.</p>
+<p>$\rm Definition$<br>
+${\rm NTIME}(t(n)) = {L|L\ {\rm is\ a\ language\ decided\ by\ an}\ O(t(n))\ {\rm time\ nondeterministic\ Turing\ machine}}$</p>
+<p>$\rm Theorem$<br>
+A language is in $\rm NP$ iff it is decided by some nondeterministic polynomial time Turing machine.</p>
+<p>$\rm Proof$<br>
+First we prove the forward direction. Let $A \in \rm NP$ and show that $A$ is decidable by a polynomial time NTM $N$. Let $V$ be a polynomial time verifier for $A$. Assume that $V$ is a TM runs in time $n^k$, we construct $N$ as follows.</p>
+<p>$N=$ on input $w$ of length $n$ :</p>
+<ol>
+<li>Nondeterministic select string $c$ of length at most $n^k$.</li>
+<li>Run $V$ on input $\langle w, c\rangle$.</li>
+<li>If $V$ accepts, <em>accept</em>. Otherwise, <em>reject</em>.</li>
+</ol>
+<p>Now we prove the other direction. Assume $A$ is decided by a polynomial time NTM $N$ and we construct a verifier $V$ as follows.</p>
+<p>$V=$ On input $\langle w, c\rangle$ :</p>
+<ol>
+<li>Simulate $N$ on input $w$, treating $c$ as a description of the nondeterministic choice to make at each step.</li>
+<li>If this branch of $N$'s computation accepts, <em>accept</em>. Otherwise, <em>rejrct</em>.</li>
+</ol>
+<p>$\rm Corollary$<br>
+$\rm NP = \bigcup_{\cal k}NTIME(\cal t(n^k))$</p>
+<hr>
+<p>Now we give some examples in $\rm NP$. Let</p>
+
+$$CLIQUE = \{\langle G,k\rangle| G\ {\rm is\ a\ graph\ with\ a\ }k\ \rm clique\}$$
+
+<p>$\rm Theorem$<br>
+$CLIQUE$ is in NP.</p>
+<p>$\rm Proof$<br>
+We give a verifier $V$ for $CLIQUE$.</p>
+<p>$V=$ On input $\langle \langle G, k \rangle c\rangle$:</p>
+<ol>
+<li>Test whether $c$ is a subgraph of $G$ with $k$ nodes.</li>
+<li>Test whether $G$ contains all edges connecting all nodes in $c$.</li>
+<li>If both pass, <em>accept</em>. Otherwise, <em>reject</em>.</li>
+</ol>
+<p>Or we can give a NTM $N$ for $CLIQUE$.</p>
+<p>$N=$ On input $\langle G, k \rangle$:</p>
+<ol>
+<li>Nondeterministically select a subset $c$ of $G$ with $k$ nodes.</li>
+<li>Test whether $G$ contains all edges connecting nodes in $c$.</li>
+<li>If yes, <em>accept</em>. Otherwise <em>reject</em>.</li>
+</ol>
+<hr>
+<p>Let</p>
+
+$$SUBSETSUM=\{\langle S, t\rangle|S = \{x_1,x_2,...,x_k\}\ {\rm and\ for\ some}$$
+ $$\{y_1,...,y_l\}\in S, {\rm we\ have\ } \Sigma y_i=t\}$$
+
+<p>$\rm Theorem$<br>
+$SUBSETSUM$ is in $\rm NP$.</p>
+<p>$\rm Proof$<br>
+We have a verifier $V$ for $SUBSETSUM$.</p>
+<p>$V=$ On input $\langle \langle S, t\rangle, c \rangle$:</p>
+<ol>
+<li>Test if $c$ is a collection of number that sum to $t$.</li>
+<li>Test is $c$ is a subset of $S$.</li>
+<li>If both pass, <em>accept</em>. Otherwise, <em>reject</em>.</li>
+</ol>
+<hr>
+<p>We have present languages in $\rm NP$ but are not known to be in $\rm P$. The question of whether $\rm P = NP$ is one of the greatest problem in tcs and math. If these classes were equal, then any polynomial verifiable problem would be polynomial decidable. Most researchers believe that the two classes are not equal because people have invested enormous effort to find polynomial time algorithms for certain problems in $\rm NP$, without success. Researchers also have tried proving that the classes are unequal, but that would entail showing that no fast algorithm exists to replace brute-force search. Doing so is presently beyond scientific reach.</p>
+<h3 id="Polynomial-time-reducibility">Polynomial time reducibility</h3>
+<p>$\rm Definition$<br>
+A function $f:\Sigma^{*}\to \Sigma^{*}$ is a $\rm polynomial\ time\ computable\ function$ if some polynomial time Turing machine exists that halts with just $f(w)$ on its tape, when started on any input $w$.</p>
+<p>$\rm Definition$<br>
+Language $A$ is $\rm polynomial\ time\ reducible$ to language $B$, written $A\le_{\rm P}$, if a polynomial time computable function $f:\Sigma^{*}\to\Sigma^{*}$ exists, where every $w$,</p>
+
+$$w\in A \Longleftrightarrow f(w)\in B$$
+
+<p>The function $f$ is called the $\rm polynomial\ time\ reduction$ of $A$ to $B$.</p>
+<p>$\rm Theorem$<br>
+If $A\le_\cp B$ and $B\in \cp$, then $B \in \cp$.</p>
+<p>$\rm Proof$<br>
+Let $M$ be a polynomial time algorithm deciding $B$ and $f$ be a polynomial time reduction from $A$ to $B$. We construct a polynomial time algorithm $N$ deciding $A$ as follows.</p>
+<p>$N=$ On input $w$:</p>
+<ol>
+<li>Compute $f(w)$.</li>
+<li>Run $M$ on input $f(w)$ and output whatever $M$ outputs.</li>
+</ol>
+<p>Clearly $N$ runs in polynomial time because both steps runs in polynomial time. $N$ decides $A$ because $w\in A$ whenever $f(w) \in B$ and $M$ decides $B$.</p>
+<hr>
+<p>Now we give a example of such reduction. We need to introduce $SAT$ and $3SAT$. First we introduce $SAT$.<br>
+A $\rm Boolean\ variable$ is a variable that can take on the value $\rm TRUE$ and $\rm FALSE$. Usually, we represent $\rm TRUE$ by $1$ and $\rm FALSE$ by $0$. Three $\rm Boolean\ operations$ $\rm AND$ $\rm OR$, $\rm NOT$, represented by symbols $\wedge, \vee, \neg$. A $\rm Boolean\ formula$ is an expression involving Boolean varibles and operations. For example,</p>
+
+$$\phi = (x \vee y) \wedge (\ol x \vee z)$$
+
+<p>A Boolean formula is $\rm satisfiable$ if some assignment of $0\rm s$ and $1\rm s$ to the varibles makes the formula evaluate to $1$ . The $\rm satisfiable\ problem$ is to test whether a Boolean formula is satisfiable. Let</p>
+
+$$SAT = \{\phi|\phi\rm\ is\ a\ satisfiable\ Boolean\ formula\}$$
+
+<p>Now we introduce $3SAT$.<br>
+A $\rm literal$ is a Boolean varible or a negated Boolean varible, as in $x$ or $\ol x$. A $\rm clause$ is several literal connected with $\vee \rm s$, as in $(x\vee y\vee \ol z)$. A Boolean formula is in $\rm conjunctive\ normal\ form$, called a $cnf$-$formula$, if it comprises of several clauses connected with $\wedge \rm s$, as in</p>
+
+$$(x_1\vee x_2\vee \ol x_3)\wedge (x_2 \vee x_4)\wedge (x_2 \vee x_3\vee \ol x_5 \vee \ol x_6)$$
+
+<p>If all clauses have 3 literal, it is a $3cnf$-$formula$, as in</p>
+
+$$(x_1 \vee x_2 \vee x_3) \wedge (\ol x_1 \vee x_3 \vee \ol x_5) \wedge (x_3 \vee \ol x_4 \vee x_5)$$
+
+<p>Let<br>
+$$3SAT = {\phi| \phi\rm\ is\ a\ satsfiable\ 3cnf\ formula}$$</p>
+<p>$\rm Theorem$<br>
+$3SAT$ is polynomial time reducible to $CLIQUE$.</p>
+<p>$\rm Proof$<br>
+TODO()</p>
+<h3 id="NP-completeness">NP-completeness</h3>
+<p>$\rm Definition$<br>
+A language $A$ is $\cnp$-$\rm complete$ if it satisfies two conditions.</p>
+<ol>
+<li>$A$ is in $\cp$.</li>
+<li>Every language $B \in \cnp$ is polynomial time reducible to $A$.</li>
+</ol>
+<p>$\rm Theorem$<br>
+If $A$ is $\cnp$-complete and $A$ is in $\cp$, then $\cp = \cnp$.</p>
+<p>$\rm Proof$<br>
+This theorem follows directly from the definition.</p>
+<p>$\rm Theorem$<br>
+If $A$ is $\cnp$-complete and $A\le_\cp B$ for $B$ in $\cnp$, then $B$ is $\cnp$-complete.</p>
+<p>$\rm Proof$<br>
+We already know that $B$ is in $\cnp$, so we need to show that every language in $\cnp$ is polynomial time reducible to $B$. Every language in $\cnp$ is polynomial time reducible to $A$, and $A$ in turn is polynomial time reducible to $B$. Hence every language in $\cnp$ is polynomial time reducible to $B$.</p>
+<h3 id="The-Cook-Levin-Theorem">The Cook-Levin Theorem</h3>
+<p>$\rm Theorem$<br>
+$SAT$ is $\rm NP$-complete.</p>
+<p>$\rm Proof$<br>
+Check <a href="">this</a>.</p>
+<h3 id="Some-NP-complete-problem">Some NP-complete problem</h3>
 
         
       
