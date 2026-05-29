@@ -14,7 +14,7 @@
 <meta property="og:description" content="Some interesting theorem in the Theory of Computation">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-05-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-28T17:59:30.395Z">
+<meta property="article:modified_time" content="2026-05-29T06:53:25.053Z">
 <meta property="article:author" content="YSuagnh">
 <meta name="twitter:card" content="summary">
   
@@ -569,7 +569,14 @@ $$3SAT = {\phi| \phi\rm\ is\ a\ satsfiable\ 3cnf\ formula}$$</p>
 <p>$\rm Theorem$<br>
 $3SAT$ is polynomial time reducible to $CLIQUE$.</p>
 <p>$\rm Proof$<br>
-TODO()</p>
+Let $\phi$ be a fuomula with $k$ clauses such as</p>
+
+$$\phi = (a_1\vee b_1\vee c_1)\wedge(a_2\vee b_2\vee c_2)\wedge ... \wedge(a_k\vee b_k\vee c_k)$$
+
+<p>We construct a graph $G$. The nodes in $G$ is organized as $k$ triples $t_1, t_2,…,t_k$. Each triple corresponds to one of the clauses in $\phi$, and each node in a triple corresponds to a literal in the associated clause. Lable each node with its corresponding literal in $\phi$. The edges in $G$ connect all node but two types of pairs of nodes. No edge between nodes in the same triple, and no edge between nodes with contradictory lables, as in $x_2$ and $\ol x_2$.<br>
+Now we show that $\phi$ is satisfiable iff $G$ has a $k$-clique.<br>
+First we show the forward direction. In a satisfiable assignment of $\phi$, at least one literal is true for each clause. If there are more than one literal is true in a clause, we pick one of them. Now we have exactly $k$ literals that are true in $\phi$. The nodes corresponding to these $k$ literals form a $k$-clique in $G$ because these $k$ nodes are in different triples and have no contradictory.<br>
+Now we show the other direction. Suppose $G$ has a $k$-clique. No two of the clique’s nodes occur in the same triples. We assign truth value to the variables of $\phi$ so that each literal labeling a clique node is made true. Doing so is always possible because two nodes labeled in a contradictory way are not connected by an edge.</p>
 <h3 id="NP-completeness">NP-completeness</h3>
 <p>$\rm Definition$<br>
 A language $A$ is $\cnp$-$\rm complete$ if it satisfies two conditions.</p>
@@ -585,12 +592,41 @@ This theorem follows directly from the definition.</p>
 If $A$ is $\cnp$-complete and $A\le_\cp B$ for $B$ in $\cnp$, then $B$ is $\cnp$-complete.</p>
 <p>$\rm Proof$<br>
 We already know that $B$ is in $\cnp$, so we need to show that every language in $\cnp$ is polynomial time reducible to $B$. Every language in $\cnp$ is polynomial time reducible to $A$, and $A$ in turn is polynomial time reducible to $B$. Hence every language in $\cnp$ is polynomial time reducible to $B$.</p>
-<h3 id="The-Cook-Levin-Theorem">The Cook-Levin Theorem</h3>
-<p>$\rm Theorem$<br>
+<h3 id="The-Cook-Levin-Theorem-and-some-NP-complete-problems">The Cook-Levin Theorem and some NP-complete problems</h3>
+<p>$\rm The\ Cook$-$\rm Levin\ Theorem$<br>
 $SAT$ is $\rm NP$-complete.</p>
+<p>Check <a href="">this</a>.</p>
+<h2 id="Space-Complexity">Space Complexity</h2>
+<p>In this chapter, we analyze how much space an algorithm uses.</p>
+<p>$\rm Definition$<br>
+Let $M$ be a deterministic Turing machine that halts on all inputs. The $\rm space\ complexity$ of $M$ is the function $f: \cal N\to N$, where $f(n)$ is the maximum number of tape cells that $M$ scans on any input of length $n$. If the space complexity of $M$ is $f(n)$, we also say that $M$ runs in space $f(n)$.<br>
+If $M$ is a nondeterministic Turing machine wherein all branches halt on all inputs, we define its space complexity $f(n)$ to be the maximum number of tape cells that $M$ scans on any branch of its computation for any input of length $n$.</p>
+<p>$\rm Definition$<br>
+Let $f:\cal N\to R^+$ be a function. The $\rm space\ complexity\ class$, ${\rm SPACE}(f(n))$ and ${\rm NSPACE}(f(n))$ are defined as follows.</p>
+
+$${\rm SPACE}(f(n))=\{L|L\ {\rm is\ a\ language\ decided\ by\ }O(f(n)) {\rm\ space\ determinstic\ TM}\}$$
+$${\rm NSPACE}(f(n))=\{L|L\ {\rm is\ a\ language\ decided\ by\ }O(f(n)) {\rm\ space\ nondeterminstic\ TM}\}$$
+
+<p>$\rm Definition$<br>
+$\rm PSPACE$ is the class of language that are decidable in polynomial space on a deterministic Turing machine. In other words,</p>
+
+$${\rm PSPACE}=\bigcup_k {\rm SPACE}(n^k)$$
+
+<hr>
+<p>We summarize our knowledge of the relationships among the complexity classes defined so far in the series of containments.</p>
+
+$$\rm P \subseteq NP \subseteq PSPACE = NPSPACE \subseteq EXPTIME$$
+
+<p>We don’t know whether any of these containments is actually an equality.</p>
+<h3 id="Savitch’s-Theorem">Savitch’s Theorem</h3>
+<p>$\rm Savitch’s\ Theorem$<br>
+For any function $f:\cal N\to R^+$, where $f(n) \ge n$,</p>
+
+$${\rm SPACE}(f(n)) \subseteq {\rm NSPACE}(f^2(n))$$
+
 <p>$\rm Proof$<br>
-Check <a href="">this</a>.</p>
-<h3 id="Some-NP-complete-problem">Some NP-complete problem</h3>
+TODO</p>
+<h3 id="PSPACE-completeness">PSPACE-completeness</h3>
 
         
       
