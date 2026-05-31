@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://ysuagnh.github.io/img/graph-2.png">
 <meta property="og:image" content="https://ysuagnh.github.io/img/algo1.png">
 <meta property="article:published_time" content="2026-05-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-31T13:52:47.560Z">
+<meta property="article:modified_time" content="2026-05-31T14:35:19.729Z">
 <meta property="article:author" content="YSuagnh">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://ysuagnh.github.io/img/graph.png">
@@ -155,7 +155,7 @@ Though the approximate algorithm might be good enough, I’d still like to intro
 <h2 id="Linear-time-exact-algorithm-for-graph-simplification">Linear time exact algorithm for graph simplification</h2>
 <p>Inspired by the probabilistic method above, I propose a new method using a tag instead of a probability to determine whether two rooted subgraphs are isomorphic.</p>
 <p>$\rm Definition\ Tag\ of\ vertices$<br>
-We define the $\rm Tag\ of\ vertices$ recursively. For $v\in V(G)$, the tag of $u$, written $tag(u)$, is $\emptyset$ if it has no child. Otherwise, $tag(u)={tag(v)|v\in C(u)}$. Where $C(u)$ denotes the set of children vertices of $u$.</p>
+We define the $\rm Tag\ of\ vertices$ recursively. For $v\in V(G)$, the tag of $u$, written $tag(u)$, is $\emptyset$ if it has no child. Otherwise, $tag(u)=\{tag(v)|v\in C(u)\}$ . Where $C(u)$ denotes the set of children vertices of $u$.</p>
 <p>Take the graph below as an example.</p>
 <p><img src="/img/graph.png" alt="graph"></p>
 
@@ -171,7 +171,7 @@ Take the graph below as an example.</p>
 <p><img src="/img/graph-2.png" alt="graph2"></p>
 <p>First we find the vertex with no children, which is $d$, label $tag(d)$ with $1$, and put it in bucket $B_1$. Then we start the topological sort.<br>
 The first vertex is $d$. We find that $a,b,c$ all have an edge to $d$, so the label of $tag(d)$ is added to their arrays. Vertex $b$ has no more children, so we check its array, which is $[1]$, and find the Trie is empty, so $tag(b)$ is labeled $2$. We put $b$ in bucket $B_2$ and insert $[1]$ into the Trie.<br>
-Next the vertex is $b$. We find that $a,c$ all have an edge to $b$, so the label of $tag(b)$ is added to their arrays. Vertices $a,c$ have no more children, so we check their arrays. Both arrays are $[1,2]$, and are not found in the Trie. Thus $tag(a)$ and $tag©$ are labeled $3$. We put $a,c$ in bucket $B_3$ and insert $[1,2]$ into the Trie.<br>
+Next the vertex is $b$. We find that $a,c$ all have an edge to $b$, so the label of $tag(b)$ is added to their arrays. Vertices $a,c$ have no more children, so we check their arrays. Both arrays are $[1,2]$, and are not found in the Trie. Thus $tag(a)$ and $tag( c )$ are labeled $3$. We put $a,c$ in bucket $B_3$ and insert $[1,2]$ into the Trie.<br>
 We find that $a$ and $c$ have the same label, thus they have the same maximal rooted subgraph.</p>
 <p>The complete algorithm runs as follows.</p>
 <p><img src="/img/algo1.png" alt="algo1"></p>
