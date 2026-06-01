@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://ysuagnh.github.io/img/graph-2.png">
 <meta property="og:image" content="https://ysuagnh.github.io/img/algo1.png">
 <meta property="article:published_time" content="2026-05-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-01T07:07:12.095Z">
+<meta property="article:modified_time" content="2026-06-01T10:38:57.815Z">
 <meta property="article:author" content="YSuagnh">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://ysuagnh.github.io/img/graph.png">
@@ -166,7 +166,7 @@ Vertex $d$ has one child $b$, $tag(d)=\{\{\emptyset\}\}$.
 
 <p>$\rm Theorem$<br>
 Let $H_1,H_2 \in G$ be maximal rooted subgraphs, and $u_1\in H_1, u_2\in H_2$ be their roots. $H_1,H_2$ are isomorphic if and only if $tag(u_1)=tag(u_2)$.</p>
-<p>This theorem is trivial and can be proved by induction. If we simply compute the tag of all vertices in $V(G)$ and compare each pair of vertices, it would run in $O(|V(G)|^4)$ time, which is not acceptable. Thus we label every tag with an integer. For each vertex, we do not record all tags from its children. Instead, we use an array to record all labels of its children’s tags. This label array has the same effect as the vertex’s tag. Then we can run a topological sort starting from vertices with no children, and record the label array for each vertex. We use a Trie to check whether an array has been labeled. If not, we give it a new index and insert it into the Trie. Finally, we put all vertices with the same label in a bucket.<br>
+<p>This theorem is trivial and can be proved by induction. If we simply compute the tag of all vertices in $V(G)$ and compare each pair of vertices, it would run in $O(|V(G)|^4)$ time, which is not acceptable. Thus we label every tag with an integer. For each vertex, we do not record all tags from its children. Instead, we use an array to record all labels of its children’s tags. This label array has the same effect as the vertex’s tag. Then we can run a topological sort starting from vertices with no children, and record the label array for each vertex. We use a Trie to check whether a tag (which is represented by a array of labels) has been labeled. If not, we give it a new integer label and insert it into the Trie. Finally, we put all vertices with the same label in a bucket, and all vertices in the same bucket are roots of isomorphic rooted subgraphs.<br>
 Take the graph below as an example.</p>
 <p><img src="/img/graph-2.png" alt="graph2"></p>
 <p>First we find the vertex with no children, which is $d$, label $tag(d)$ with $1$, and put it in bucket $B_1$. Then we start the topological sort.<br>
@@ -175,7 +175,7 @@ Next the vertex is $b$. We find that $a,c$ all have an edge to $b$, so the label
 We find that $a$ and $c$ have the same label, thus they have the same maximal rooted subgraph.</p>
 <p>The complete algorithm runs as follows.</p>
 <p><img src="/img/algo1.png" alt="algo1"></p>
-<p>The algorithm runs in $O(|V(G)+|V(E)|)$ time.</p>
+<p>The algorithm runs in $O(|V(G)+|E(G)|)$ time.</p>
 <h2 id="Implement">Implement</h2>
 <p><a href="/code/gs.zip">Here</a> is a demo of the algorithm. Input is a graph, output are multiple sets containing vertices. All vertices in the same set are roots of isomorphic maximal rooted subgraphs. In the demo we didn’t concern the depth of rooted subgraphs, which can also be computed in linear time.</p>
 <p>The format of input is as follows.<br>
