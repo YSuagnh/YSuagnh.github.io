@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://ysuagnh.github.io/img/graph-2.png">
 <meta property="og:image" content="https://ysuagnh.github.io/img/algo1.png">
 <meta property="article:published_time" content="2026-05-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-31T14:35:19.729Z">
+<meta property="article:modified_time" content="2026-06-01T07:07:12.095Z">
 <meta property="article:author" content="YSuagnh">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://ysuagnh.github.io/img/graph.png">
@@ -176,6 +176,12 @@ We find that $a$ and $c$ have the same label, thus they have the same maximal ro
 <p>The complete algorithm runs as follows.</p>
 <p><img src="/img/algo1.png" alt="algo1"></p>
 <p>The algorithm runs in $O(|V(G)+|V(E)|)$ time.</p>
+<h2 id="Implement">Implement</h2>
+<p><a href="/code/gs.zip">Here</a> is a demo of the algorithm. Input is a graph, output are multiple sets containing vertices. All vertices in the same set are roots of isomorphic maximal rooted subgraphs. In the demo we didn’t concern the depth of rooted subgraphs, which can also be computed in linear time.</p>
+<p>The format of input is as follows.<br>
+First line contains two numbers, $n$ and $m$. $n=|V(G)|$, $m=|E(G)|$.<br>
+The following $m$ lines, each line contains two numbers $u$ and $v$, representing a edge in $E(G)$.<br>
+We require the given graph to be a DAG and $0\le u,v &lt; n$.</p>
 
         
       
