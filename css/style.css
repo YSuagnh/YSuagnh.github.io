@@ -582,10 +582,15 @@ a.article-title:hover {
 .article-entry ol,
 .article-entry dl {
   margin-top: 0;
-  margin-bottom: 0.8em;
+  margin-bottom: 0;
 }
-.article-entry li p {
-  margin: 0.35em 0;
+.article-entry p + ul,
+.article-entry p + ol {
+  margin-top: -1.6em;
+}
+.article-entry ul li p,
+.article-entry ol li p {
+  margin: 0;
 }
 .article-entry img,
 .article-entry video {
