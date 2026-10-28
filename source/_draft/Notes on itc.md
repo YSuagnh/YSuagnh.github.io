@@ -137,10 +137,11 @@ Now we use diagonalization method to prove that there is no onto function from $
 
 Now we give an example of a undicidable language.
 
-Let 
+Let {% raw %}
 $$
 A_\sf{TM}=\{\langle M, w\rangle|M\ is\ a\ TM\ and\ M\ accepts\ w\}
 $$
+{% endraw %}
 
 $\rm{Theorem}$
 $A_\sf{TM}$ undicidable.
@@ -368,10 +369,6 @@ The only differenct between $f$ and $g$ is in machine $M_1$.
 
 ---
 
-## Advanced Topics in Computability Theory
-
-See [this](/2025/12/10/hello-world/).
-
 # Complexity Theory
 
 ## Time Complexity
@@ -520,7 +517,7 @@ $\rm Definition$
 A function $f:\Sigma^{\*}\to \Sigma^{\*}$ is a $\rm polynomial\ time\ computable\ function$ if some polynomial time Turing machine exists that halts with just $f(w)$ on its tape, when started on any input $w$.
 
 $\rm Definition$
-Language $A$ is $\rm polynomial\ time\ reducible$ to language $B$, written $A\le_{\rm P}$, if a polynomial time computable function $f:\Sigma^{\*}\to\Sigma^{\*}$ exists, where every $w$,
+Language $A$ is $\rm polynomial\ time\ reducible$ to language $B$, written $A\le_{\rm P}B$, if a polynomial time computable function $f:\Sigma^{\*}\to\Sigma^{\*}$ exists, where every $w$,
 {% raw %}
 $$w\in A \Longleftrightarrow f(w)\in B$$
 {% endraw %}
@@ -641,3 +638,35 @@ $\rm Proof$
 TODO
 
 ### PSPACE-completeness
+
+$\rm Definition$
+A language $B$ is $\rm PSPACE$-$complete$ if it is in $\rm PSPACE$ and every language $A$ in $\rm PSPACE$ is polynomial reducible to $B$. If $B$ merely satsify the second condition, we say it is $\rm PSPACE$-$hard$.
+
+---
+
+Now we give an example of $\rm PSPACE$-$complete$ problem, first we introduce the TQBF problem.
+
+Recall that a $\rm Boolean\ formula$ is an expression that contains Boolean variables, the constants 0 and 1 and the Boolean operations $\vee, \wedge, \neg$. Now we introduce the $\rm quantifiers$ $\forall$ and $\exist$  to Boolean formula. Writing $\forall x \phi$ means that for $every$ value for the variable $x$, the statement $\phi$ is true. Writing $\exist x \phi$ means that for $some$ value for the variable $x$, the statement is true.  
+Boolean formulas with quantifiers are called quantified Boolean formulas. When each variables of a formula appears within the scope of some quantifiers, the formula is said to be $\rm fully\ quantified$.  
+The $TQBF$ problem is to determine whether a fully quantified Boolean formula is true or false. We define the language.  
+{% raw %}
+$$TQBF = \{\langle \phi \rangle|\rm \phi\ is\ a\ true\ fully\ quantified\ Boolean\ formula\}$$
+{% endraw %}
+
+$\rm Theorem$
+$TQBF$ is $\rm PSPACE$-$\rm complete$.
+
+$\rm Proof$
+TODO
+
+### The class L and NL
+
+$\rm Definition$
+$\rm L$ is the class of languages that are decidable in logarithmic space on a deterministic Turing machine. {% raw %}
+$$\rm L=SPACE(\log \cal n)$$
+{% endraw %}
+
+$\rm NL$ is the class of languages that are decidable in logarithmic space on a nondeterministic Turing machine. {% raw %}
+$$\rm NL=SPACE(\log \cal n)$$
+{% endraw %}
+

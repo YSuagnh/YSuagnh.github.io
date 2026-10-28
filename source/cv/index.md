@@ -3,6 +3,6 @@ title: CV
 date: 2026-05-11 00:00:00
 ---
 
-[CV-zh](CV-zh.pdf)
+[CV-zh](YangShu-CV-zh.pdf)
 
-[CV-en](CV-en.pdf)
+[CV-en](YangShu-CV-en.pdf)
