@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>CCPC2025Jinan | Welcome to YSuagnh&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="回文串的大厦已经建成。      ——— 401rk8">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CCPC2025Jinan">
+<meta property="og:url" content="https://ysuagnh.github.io/2026/10/28/CCPC2025jinan/index.html">
+<meta property="og:site_name" content="Welcome to YSuagnh&#39;s Blog">
+<meta property="og:description" content="回文串的大厦已经建成。      ——— 401rk8">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-10-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-10-28T05:39:20.177Z">
+<meta property="article:author" content="YSuagnh">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Welcome to YSuagnh's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Welcome to YSuagnh&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">正如我们共同谱写的故事那般~</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Category</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/cv">CV</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://YSuagnh.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-CCPC2025jinan" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/10/28/CCPC2025jinan/" class="article-date">
+  <time class="dt-published" datetime="2026-10-27T16:00:00.000Z" itemprop="datePublished">2026-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/XCPC/">XCPC</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      CCPC2025Jinan
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+          <p><strong>回文串的大厦已经建成。</strong>      ——— 401rk8</p>
+<hr>
+<span id="more"></span>
+<h3 id="A-Cipher">A. Cipher</h3>
+<h4 id="题意">题意</h4>
+<p>给定两个正整数 $a, b$ ，求最小的 $x$ 满足 $a^x \equiv b\mod 2^{64}$</p>
+<h4 id="题解">题解</h4>
+<p>如果 $a$ 是偶数，则 $a = 2p$ , $a^{64} \equiv 2^{64}p^{64} \equiv 0 \mod 2^{64}$ ,因此 $x\in[0, 64)$ ,暴力枚举即可。</p>
+<p>如果 $a$ 是奇数，考虑能否按位构造。令 $a-1 = 2^k p_1$ 其中，$p_1$ 是奇数。则 $a^2 = 1 + 2^{k+1}p_1 + 2^{2k}p_1^2$ 。则 $a^2 - 1$ 可以写成 $2^{k+1}p_2$ ，根据这一性质逐位构造即可。</p>
+<h3 id="C-Finding-Keywords">C. Finding Keywords</h3>
+<p>签到题 1</p>
+<h3 id="E-Tree-and-Subgraph">E. Tree and Subgraph</h3>
+<h4 id="题意-2">题意</h4>
+<p>给定一棵树，每个点有一个颜色，选出两个集合，每个集合内的点颜色相同，且两个集合构成的最小联通子树不相交。</p>
+<h4 id="题解-2">题解</h4>
+<p>若两个集合构成的最小联通子树不相交，则两个集合一定被一条边分开，两个集合内的点分别在这条边的两边。用启发式合并统计每条边的贡献即可。</p>
+<p>接下来考虑算重的情况。如果两个集合可以被多条边分开，则每个贡献会被统计多次。考虑在每个点处统计被这个点分开的集合对数，两个被分开的集合之间一定由 $n$ 条边和 $n-1$ 个点构成，因此用边的贡献减去点的贡献即可。</p>
+<h3 id="F-Grid-Filling-Game">F. Grid Filling Game</h3>
+<h4 id="题意-3">题意</h4>
+<p>一个长度为 $n$ 的序列，第 $i$ 个位置可以在 $[l_i, r_i]$ 中选一个值。最终序列的权值为所有极长的值相同的连续段的长度的平方和。求序列最小权值。</p>
+<h4 id="题解-3">题解</h4>
+<p>注意到如果一个位置的 $r_i - l_i &gt; 1$ 则这个位置有至少三种选择，而它只与两个位置相邻，因此这个位置一定与两遍的值都不相同。因此只需要考虑 $r_i - l_i \le 1$ 的连续段。在这样的连续段上进行贪心，每个位置上可能有两种取值，也可能只有一种取值，记录上一次两种取值的答案分别是什么，若当前位置只有一种取值就直接继承过来，若当前位置有两种取值，对于这两种取值，分别从上次两种取值的答案中找一个最优的。</p>
+<h3 id="H-Hashing">H. Hashing</h3>
+<h4 id="题意-4">题意</h4>
+<p>给定树 Hash 函数 $H® = 1 + \sum_{v\in son_r} f(siz_v)H(v)$ ,其中 $r$ 为根节点，$son_r$ 为 $r$ 的所有儿子，$f$ 是任意$N \rightarrow N$ 的映射。两棵树是不同的当且仅当存在一种 $f$ 使得两棵树的 Hash 函数不同。求有多少大小为 $n$ 相互不同的二叉树，答案对输入的 $p$ 取模。</p>
+<h4 id="题解-4">题解</h4>
+<p>将 $f(siz)$ 带入Hash函数，存在 $f$ 使得两棵树Hash值不同当且仅当两棵树的 Hash 表达式不同。</p>
+<p>考虑两棵大小为 $n$ 的树 $T_a, T_b$ 在哪些情况下 hash 值不同。将 $T_a$ 分裂成两棵子树 $a_1, a_2$ , $T_b$ 分裂成两棵子树 $b_1, b_2$ ，有 $siz_{a_1}+siz_{a_2} + 1 = siz_{b_1}+siz_{b_2}+1=n$, 若集合 ${siz_{a_1},siz_{a_2}}$ 与 ${siz_{b_1}, siz_{b_2}}$ 不同，则 $H(T_a) = f(siz_{a_1})H(a_1)+f(siz_{a_2})H(a_2)$, $H(T_b) = f(siz_{b_1})H(b_1)+f(siz_{b_2})H(b_2)$ ，一定可以构造出 $f$ 使得两者不同。</p>
+<p>反之，若 $siz_{a_1}=siz_{a_2}=siz_{b_1}=siz_{b_2} = S$ 则 $H(T_a)=f(S)[H(a_1)+H(a_2)], H(T_b)=f(S)[H(b_1)+H(b_2)]$ ,两者不同当且仅当 $H(a_1)+H(a_2)\neq H(b_1)+H(b_2)$ ，其中 $a_1,a_2,b_1,b_2$ 都是大小为 $S$ 的树。</p>
+<p>我们受此启发可以设计 $dp_{i,j}$ 表示 $j$ 个大小为 $i$ 的树的 Hash 的和有多少种不同取值。背包 dp 转移即可。最终的答案为 $dp_{n,1}$ 。</p>
+<h3 id="I-I-Love-CCPC">I. I Love CCPC</h3>
+<p>回文串的大厦已经建成。</p>
+<h3 id="K-Card-Game">K. Card Game</h3>
+<p>签到题 3</p>
+<h3 id="L-Activity-Rehearsal">L. Activity Rehearsal</h3>
+<p>签到题 2</p>
+
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ysuagnh.github.io/2026/10/28/CCPC2025jinan/" data-id="cuidO8seOE19dXtp4xGCb6h2S" data-title="CCPC2025Jinan" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2025/12/10/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/XCPC/">XCPC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%97%B2%E8%81%8A/">闲聊</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/10/">十月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/10/28/CCPC2025jinan/">CCPC2025Jinan</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/10/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 YSuagnh<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Category</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/cv" class="mobile-nav-link">CV</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
