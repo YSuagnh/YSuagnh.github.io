@@ -94,6 +94,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-CF1130" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/10/29/CF1130/" class="article-date">
+  <time class="dt-published" datetime="2026-10-29T08:17:11.199Z" itemprop="datePublished">2026-10-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+          <h2 id="CF1130（div2）">CF1130（div2）</h2>
+<h3 id="E-Memory-Cell-Interception">E. Memory Cell Interception</h3>
+<h4 id="题意">题意</h4>
+<p>有两个线程$A,B$，每个线程有一组操作序列，两个线程可以交替按顺序执行。如 $a_1, a_2, b_1, b_2, a_3, b_3, b_4$ 。每个操作是写或者读，如果是写操作就在内存中写下当前的时间戳，若是读操作就读取内存中的数据。现在求每个读操作可能读到多少种不同的数据。</p>
+<h4 id="题解">题解</h4>
+<p>考虑对于一个读操作读到的数可能是哪个写操作写在内存中的。首先记另一个操作序列的长度为 $n$，当前位置是 $i$，前一个写操作的位置是 $lst$ 。</p>
+<p>1、读到的数是当前序列中的前一个写操作写下的。则写操作可能写下的时间戳为 $[lst, lst + n]$ 。</p>
+<p>2、读到的数据是另一个序列中的一个写操作 $a$ 写下的。则写操作可能写下的时间戳为 $[lst + a, i - 1 + a]$。</p>
+<p>注意到 $lst+a\le lst + n$ 因此如果该读操作之前有一个写操作，只需要记录 $i - 1 + a$ 的最大值即可。如果该读操作之前没有写操作，可能的读到的时间戳由若干 $[a, i - 1 + 1]$区间构成，直接用链表维护所有的区间即可。</p>
+<h3 id="F-Tree-Reduction-Game">F. Tree Reduction Game</h3>
+<h4 id="题意-2">题意</h4>
+<p>给定一棵树，A 和 B 从根节点出发，两人轮流操作，每次可以选择一个儿子节点，走向这个儿子节点并将其作为新的根，或者将这条边砍断。每个点只能当一次根。求所有后手必胜的点。</p>
+<h4 id="题解-2">题解</h4>
+<p>考虑根节点 $u$ 某个子树 $v$ 是后手必胜的，则若 A 从 $u$ 走向这个子树 $v$，B 砍断 $u,v$ 之间的边，则 A 必败。因此不会有人走后手必胜的子树。考虑一个先手必胜的子树 $w$ ，若 A 从 $u$ 走向 $w$ ，则 B 面临的局面是在原先先手必胜的子树 $w$ 上加了一个叶子节点 $u$ ，因为 $u$ 无法再次成为根。考虑原先 $w$ 的必胜策略，如果 $w$ 原先的必胜策略是走向 $w$ 的一个子树，则 B 必胜；否则只能轮流砍掉所有儿子，由于多了一个叶子结点，则 A 必胜。因此对于每个点 $u$，只需要统计这个点的度数 $u$ 以及有多少个点 $v$ 满足只要 A 从 $u$ 走向 $v$ 就必胜即可。最后做一个换根 dp。</p>
+<h3 id="G-Ranges">G. Ranges</h3>
+<h4 id="题意-3">题意</h4>
+<p>给定若干区间，对一个区间 $[l, r]$ 进行查询时，若从未查询过这个区间，可以选择直接查询，或者选择一个 $k$ ,对 $[l,k],[k+1,r]$ 分别查询。若之前查询过该区间则无需查询。</p>
+<p>进行若干次修改，每次将一个旧区间改成一个新区间，求每次修改后重新查询所有区间，最少需要多少次直接查询。</p>
+<h4 id="题解-3">题解</h4>
+<p>使用一个十分巧妙的图论转化，对于每一个区间 $[l,r]$，连接一条 $l\rightarrow r+1$ 的有向边。一个区间无需查询当且仅当存在从 $l$ 到 $r+1$ 的路径。用并插集维护这一操作，答案就是并查集的合并次数。对于修改操作，将所有操作离线下来，就是经典的线段树分治套路。</p>
+
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ysuagnh.github.io/2026/10/29/CF1130/" data-id="cuid--gmaevbm9Tyasjsymrej" data-title="" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-CCPC2025jinan" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2026/10/28/CCPC2025jinan/" class="article-date">
@@ -223,6 +273,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/10/29/CF1130/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2026/10/28/CCPC2025jinan/">CCPC2025Jinan</a>
