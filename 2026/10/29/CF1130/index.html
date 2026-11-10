@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>CF1130-1132 | Welcome to YSuagnh&#39;s Blog</title>
+  <title>CF1130 + CFEDU196 + CF1132 | Welcome to YSuagnh&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="CF1130（div2） E. Memory Cell Interception 题意 有两个线程$A,B$，每个线程有一组操作序列，两个线程可以交替按顺序执行。如 $a_1, a_2, b_1, b_2, a_3, b_3, b_4$ 。每个操作是写或者读，如果是写操作就在内存中写下当前的时间戳，若是读操作就读取内存中的数据。现在求每个读操作可能读到多少种不同的数据。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CF1130-1132">
+<meta property="og:title" content="CF1130 + CFEDU196 + CF1132">
 <meta property="og:url" content="https://ysuagnh.github.io/2026/10/29/CF1130/index.html">
 <meta property="og:site_name" content="Welcome to YSuagnh&#39;s Blog">
 <meta property="og:description" content="CF1130（div2） E. Memory Cell Interception 题意 有两个线程$A,B$，每个线程有一组操作序列，两个线程可以交替按顺序执行。如 $a_1, a_2, b_1, b_2, a_3, b_3, b_4$ 。每个操作是写或者读，如果是写操作就在内存中写下当前的时间戳，若是读操作就读取内存中的数据。现在求每个读操作可能读到多少种不同的数据。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-10-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-11-10T06:37:17.006Z">
+<meta property="article:modified_time" content="2026-11-10T08:40:20.233Z">
 <meta property="article:author" content="YSuagnh">
 <meta name="twitter:card" content="summary">
   
@@ -114,7 +114,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      CF1130-1132
+      CF1130 + CFEDU196 + CF1132
     </h1>
   
 
@@ -144,12 +144,34 @@
 <p>进行若干次修改，每次将一个旧区间改成一个新区间，求每次修改后重新查询所有区间，最少需要多少次直接查询。</p>
 <h4 id="题解-3">题解</h4>
 <p>使用一个十分巧妙的图论转化，对于每一个区间 $[l,r]$，连接一条 $l\rightarrow r+1$ 的有向边。一个区间无需查询当且仅当存在从 $l$ 到 $r+1$ 的路径。用并插集维护这一操作，答案就是并查集的合并次数。对于修改操作，将所有操作离线下来，就是经典的线段树分治套路。</p>
+<h2 id="CF-EDU-Round-196">CF EDU Round 196</h2>
+<h3 id="G-Order-Statistics-on-the-Graph">G. Order Statistics on the Graph</h3>
+<h4 id="题意-4">题意</h4>
+<p>给定一个 $n(n\le 20)$ 个点 $m$ 条边的有向图，每个点有权值。每次操作时，点 $u$ 从所有入边中选择第 $d_u$ 大的点作为自己的权值，每次操作所有点同步进行，给定 $q$ 次询问，每次给定点的初始权值和 $t$ ，求 $t$ 次操作后每个点的权值。</p>
+<h4 id="题解-4">题解</h4>
+<p>比较套路，考虑将所有小于 $a_u$ 的数标记为 0，其余数标记为 1，状压倍增转移，即可知道 t 次操作后每个点的权值是否小于 $a_u$ 。直接做的复杂度为 $O(2^n\log t + qn\log t)$ ，难以通过。考虑每种状态只有一种可能的转移，因此所有状态构成一个基环森林，将所有询问离线后在基环森林上dfs，即可在 $O(2^n + qn)$ 时间内处理。</p>
+<h2 id="CF-1132-div-2">CF 1132 (div 2)</h2>
+<h3 id="E-My-Mind-Is-Going">E. My Mind Is Going</h3>
+<h4 id="题意-5">题意</h4>
+<p>给定一个 $n(n\le 2000)$ 个点的二分图 $G$ ，有 $G’ = G \cup \{e_1,e_2\}$ ，满足一下条件：</p>
+<ul>
+<li>$G’$ 不是二分图</li>
+<li>$G\cup e_1$ 和 $G\cup e_2$ 都是二分图</li>
+</ul>
+<p>可以进行一下两种询问，需要给出 $e_1,e_2$ 其中的一条边，总询问次数不能超过 $33$ 次：</p>
+<ul>
+<li>询问若干个点在 $G’$ 中的诱导子图是否是二分图</li>
+<li>询问一条边 $u,v$ 是否是 $e_1,e_2$ 其中之一</li>
+</ul>
+<h4 id="题解-5">题解</h4>
+<p>根据二分图不奇环的性质，$e_1,e_2$ 一定是连接了 $G$ 中的两个联通分量。由 bfs 的性质，任何一个联通分量的 bfs 序的前缀一定是联通的。令 $e_1=(u_1,v_1),e_2=(u_2,v_2)$ ，考虑点集 $S$ 在 $G’$ 的诱导子图如果不是二分图，则 $S$ 一定同时包含了 $u_1,v_1,u_2,v_2$，同时 $S$ 在 $G$ 中的诱导子图 $H$ 中，$u_1,v_1$ 和 $u_2,v_2$ 一定是联通的，这样才会包含一个奇数环。</p>
+<p>求出 $G$ 的一个 bfs 序，每次询问该bfs序的一个前缀，若不是二分图，则前缀中一定包含 $u_1,v_1,u_2,v_2$ 这四个点，通过一次二分可以求出这四个点中的一个，令其为 $u_1$ ，将 $u_1$ 所在的联通分量放在 bfs 序的开头，再进行一次二分可以求出 $v_1,v_2$ 中的一个，记为 $w$。询问这两个点是否为所求的一条边，若不是，则将 $w$ 放在 bfs 序的开头，求出另一个点一定是 $v_1$ 。最后一次二分时将较大的联通分量放在前面可以节省一次询问次数。</p>
 
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ysuagnh.github.io/2026/10/29/CF1130/" data-id="cuid--gmaevbm9Tyasjsymrej" data-title="CF1130-1132" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://ysuagnh.github.io/2026/10/29/CF1130/" data-id="cuid--gmaevbm9Tyasjsymrej" data-title="CF1130 + CFEDU196 + CF1132" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -207,7 +229,7 @@
       <ul>
         
           <li>
-            <a href="/2026/10/29/CF1130/">CF1130-1132</a>
+            <a href="/2026/10/29/CF1130/">CF1130 + CFEDU196 + CF1132</a>
           </li>
         
           <li>
